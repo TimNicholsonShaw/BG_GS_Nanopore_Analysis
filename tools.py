@@ -2,6 +2,7 @@
 A suite of tools for analysis of Beta Globin Specific Nanopore Sequencing
 """
 import re, csv
+from glob import glob
 
 #What each column in a sam file represents
 samColumnsDict = {
@@ -72,8 +73,12 @@ def samFilterer(sam_loc):
                     [lengthFinder(line[5])]
                     )
 
+def globSamFilterer(pattern): #give a pattern of files and it'll will filter them all
+    files = glob(pattern)
 
-
+    for file in files:
+        samFilterer(file)
+        print("finished", file)
 
 
     
