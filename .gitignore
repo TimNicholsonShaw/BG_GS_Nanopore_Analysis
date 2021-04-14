@@ -130,3 +130,6 @@ dmypy.json
 
 #Visual Studio
 *.vscode
+
+#Any kind of sam file
+*.sam*
