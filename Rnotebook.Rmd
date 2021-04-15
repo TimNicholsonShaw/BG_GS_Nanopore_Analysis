@@ -1,4 +1,13 @@
+Imports
 ```{r}
-head(cars)
+source("graphFunctions.r")
+library("tidyverse")
+library("ggplot2")
+```
+
+```{r}
+df <- read_in_prepped_sam("../nsd_alns/test.csv")
+
+plot_lengths(df, "02_nsdaln.sam")
 ```
 
