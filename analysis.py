@@ -6,10 +6,10 @@ import tools
 Things I want to ask and know about each sam file
 xPercent mapped
 xPercent mapped with with mismapped 5' ends
--Median Length
--Stdev length
--Percent mapped longer than 500nt
--Percent mapped, with proper 5' ends that map to full length
+xMedian Length
+xStdev length
+xPercent mapped longer than 500nt
+xPercent mapped, with proper 5' ends that map to full length
 """
 
 def findPercentMapped(sam_df):
@@ -72,6 +72,20 @@ def findStdevLengthMapped(sam_df):
 
 def findStdevLengthTotal(sam_df):
     return sam_df.SEQ.str.len().std()
+
+def percentProperMappedLongerCutoff(sam_df, cutoff=500):
+    sam_df = tools.filterProperMapped(sam_df)
+
+    is_long = sam_df.LENGTH > cutoff
+
+    return len(sam_df[is_long])/len(sam_df)
+
+def percentProperMappedFullLength(sam_df, FLThreePrime=2356, margin=30):
+    sam_df = tools.filterProperMapped(sam_df)
+
+    properThree = (sam_df.RIGHT > FLThreePrime - margin) & (sam_df.RIGHT < FLThreePrime + margin)
+
+    return len(sam_df[properThree]) / len(sam_df)
 
 def summarizeSAM(sam_df):
     pass

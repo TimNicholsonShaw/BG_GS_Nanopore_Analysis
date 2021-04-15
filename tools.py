@@ -81,7 +81,7 @@ def globSamFilterer(pattern): #give a pattern of files and it'll will filter the
         samFilterer(file)
         print("finished", file)
 
-
+#Reads sam into pd dataframe
 def samReader(file_loc):
     """
     Reads a sam file into a pandas dataframe
@@ -99,6 +99,7 @@ def samReader(file_loc):
 
     return df
 
+#Adds LENGTH and RIGHT position to sam df
 def samExtender(sam_df):
     """
     Adds a mapped length and a right side position.
@@ -110,11 +111,23 @@ def samExtender(sam_df):
 
     return sam_df
 
+#Checks for LENGTH and RIGHT, adds if isn't there
 def isExtendedOrReturnsExtended(sam_df):
     if "LENGTH" in sam_df.columns and "RIGHT" in sam_df.columns:
         return sam_df
     else:
         return samExtender(sam_df)
+
+#Returns sam df with properly mapped reads
+def filterProperMapped(sam_df, properFivePrime=706, margin=10):
+    sam_df = isExtendedOrReturnsExtended(sam_df)
+
+    is_mapped = sam_df.FLAG.isin([0,16])
+    properFiveMapped = ((sam_df.POS > properFivePrime - margin) & (sam_df.POS < properFivePrime + margin)) & is_mapped
+
+    return sam_df[properFiveMapped]
+
+
 
 def exportSAMForR(sam_df):
     pass
