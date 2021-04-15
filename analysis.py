@@ -88,7 +88,46 @@ def percentProperMappedFullLength(sam_df, FLThreePrime=2356, margin=30):
     return len(sam_df[properThree]) / len(sam_df)
 
 def summarizeSAM(sam_df):
-    pass
+
+    summary = {}
+
+    summary['perMapped'] = findPercentMapped(sam_df)
+
+    if summary['perMapped'] == 1.0: 
+        raise Exception("You need to use an unfiltered sam for this function")
+
+    summary['perMisMappedFive'] = findMismappedFivePrime(sam_df)
+    summary['totalReads'] = findTotalReads(sam_df)
+    summary['medLenMapped'] = findMedianLengthMapped(sam_df)
+    summary['stdevLenMapped'] = findStdevLengthMapped(sam_df)
+    summary['medLenTotal'] = findMedianLengthTotal(sam_df)
+    summary['stdevLenTotal'] = findStdevLengthTotal(sam_df)
+    summary['meanLenMapped'] = findMeanLengthMapped(sam_df)
+    summary['meanLenTotal'] = findMeanLengthTotal(sam_df)
+    
+    summary['perMappedLongerCutoff'] = percentProperMappedLongerCutoff(sam_df)
+    summary['perMappedFullLength'] = percentProperMappedFullLength(sam_df)
+
+    return summary
+
+def summarizeSAMFiles(samList):
+
+    combo_dict ={}
+    file_names = []
+
+    for file in samList:
+
+        file_names.append(file[file.rfind("/")+1:])
+        sam_df = tools.samReader(file)
+
+        for key, value in summarizeSAM(sam_df).items():
+            combo_dict.setdefault(key, []).append(value)
+
+    df = pd.DataFrame.from_dict(combo_dict)
+    
+    df.index = file_names
+    
+    return df
 
 
 
