@@ -11,8 +11,25 @@ library("ggplot2")
 ```
 
 ```{r}
-df <- read_in_prepped_sam("../nsd_alns/test.csv")
+df <- read_in_prepped_sam("../nsd_alns/PNK_Treated_Rdata.csv") #From TLS137
+```
+```{r}
 
-plot_lengths(df, "02_nsdaln.sam")
+filter(df, ATTRIBUTE=='LENGTH') %>%
+  ggplot(aes(x=SAMPLE, y=VALUE)) + geom_boxplot()
+```
+```{r}
+filter(df, SAMPLE=="09_nsdaln.sam" | SAMPLE=="10_nsdaln.sam", ATTRIBUTE=='LENGTH') %>%
+  ggplot(aes(x=VALUE, color=SAMPLE)) + geom_density()
+```
+
+```{r}
+df <- read_in_prepped_sam("../TLS129_nsd_alns/Rformatted_TLS129.csv") #From TLS129
+
+```
+
+```{r}
+filter(df, SAMPLE=="02_nsdaln.sam" | SAMPLE=="05_nsdaln.sam" |SAMPLE=="08_nsdaln.sam" | SAMPLE=="11_nsdaln.sam", ATTRIBUTE=='LENGTH') %>%
+  ggplot(aes(x=VALUE, color=SAMPLE)) + geom_density()
 ```
 
