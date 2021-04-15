@@ -1,3 +1,8 @@
+---
+title: "BG GS Nanopore Graphing"
+output: html_notebook
+---
+
 Imports
 ```{r}
 source("graphFunctions.r")

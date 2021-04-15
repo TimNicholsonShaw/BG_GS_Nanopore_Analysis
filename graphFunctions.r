@@ -10,7 +10,6 @@ read_in_prepped_sam <- function(csv_file) {
 }
 
 plot_lengths <- function(df, sample) {
-
     filter(df, SAMPLE==sample, ATTRIBUTE=="LENGTH") %>%
         ggplot(aes(x=VALUE)) + geom_density()
 
