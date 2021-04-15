@@ -117,8 +117,14 @@ def summarizeSAMFiles(samList):
 
     for file in samList:
 
+        try:
+            sam_df = tools.samReader(file)
+        except:
+            print('there was a problem reading ', file)
+            continue
+
         file_names.append(file[file.rfind("/")+1:])
-        sam_df = tools.samReader(file)
+        
 
         for key, value in summarizeSAM(sam_df).items():
             combo_dict.setdefault(key, []).append(value)
@@ -127,7 +133,7 @@ def summarizeSAMFiles(samList):
     
     df.index = file_names
     
-    return df
+    return df.sort_index().transpose()
 
 
 

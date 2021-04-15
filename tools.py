@@ -95,7 +95,8 @@ def samReader(file_loc):
         delimiter="\t", 
         header=None, 
         usecols=range(11),
-        names=sam_cols)
+        names=sam_cols,
+        quoting=csv.QUOTE_NONE) #prevents weird EOF parsing errors with quotes in the PHRED scores
 
     return df
 
