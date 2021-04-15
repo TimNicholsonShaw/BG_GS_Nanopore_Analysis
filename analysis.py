@@ -5,7 +5,7 @@ import tools
 """
 Things I want to ask and know about each sam file
 xPercent mapped
--Percent mapped with with mismapped 5' ends
+xPercent mapped with with mismapped 5' ends
 -Median Length
 -Stdev length
 -Percent mapped longer than 500nt
@@ -39,5 +39,42 @@ def findMismappedFivePrime(sam_df, proper_5_loc=706, margin=10):
 
 def findTotalReads(sam_df):
     return len(sam_df)
+
+def findMedianLengthMapped(sam_df):
+
+    sam_df = tools.isExtendedOrReturnsExtended(sam_df)
+    is_mapped = sam_df.FLAG.isin([0,16])
+    sam_df = sam_df[is_mapped]
+
+    return sam_df.LENGTH.median()
+
+def findMeanLengthMapped(sam_df):
+
+    sam_df = tools.isExtendedOrReturnsExtended(sam_df)
+    is_mapped = sam_df.FLAG.isin([0,16])
+    sam_df = sam_df[is_mapped]
+
+    return sam_df.LENGTH.mean()
+
+def findMedianLengthTotal(sam_df):
+    return sam_df.SEQ.str.len().median()
+
+def findMeanLengthTotal(sam_df):
+    return sam_df.SEQ.str.len().mean()
+
+def findStdevLengthMapped(sam_df):
+
+    sam_df = tools.isExtendedOrReturnsExtended(sam_df)
+    is_mapped = sam_df.FLAG.isin([0,16])
+    sam_df = sam_df[is_mapped]
+
+    return sam_df.LENGTH.std()
+
+def findStdevLengthTotal(sam_df):
+    return sam_df.SEQ.str.len().std()
+
+def summarizeSAM(sam_df):
+    pass
+
 
 

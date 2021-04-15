@@ -109,3 +109,12 @@ def samExtender(sam_df):
     sam_df['LENGTH'] = [lengthFinder(CIGAR) for CIGAR in sam_df.CIGAR]
 
     return sam_df
+
+def isExtendedOrReturnsExtended(sam_df):
+    if "LENGTH" in sam_df.columns and "RIGHT" in sam_df.columns:
+        return sam_df
+    else:
+        return samExtender(sam_df)
+
+def exportSAMForR(sam_df):
+    pass
