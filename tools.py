@@ -127,8 +127,3 @@ def filterProperMapped(sam_df, properFivePrime=706, margin=10):
     properFiveMapped = ((sam_df.POS > properFivePrime - margin) & (sam_df.POS < properFivePrime + margin)) & is_mapped
 
     return sam_df[properFiveMapped]
-
-
-
-def exportSAMForR(sam_df):
-    pass
