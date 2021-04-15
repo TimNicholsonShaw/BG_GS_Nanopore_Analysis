@@ -3,6 +3,7 @@ A suite of tools for analysis of Beta Globin Specific Nanopore Sequencing
 """
 import re, csv
 from glob import glob
+import pandas as pd
 
 #What each column in a sam file represents
 samColumnsDict = {
@@ -81,4 +82,30 @@ def globSamFilterer(pattern): #give a pattern of files and it'll will filter the
         print("finished", file)
 
 
-    
+def samReader(file_loc):
+    """
+    Reads a sam file into a pandas dataframe
+    """
+    #names of SAM Columns
+
+    sam_cols = [samColumnsDict[x] for x in range(11)]
+
+    df = pd.read_csv(file_loc, 
+        comment="@", 
+        delimiter="\t", 
+        header=None, 
+        usecols=range(11),
+        names=sam_cols)
+
+    return df
+
+def samExtender(sam_df):
+    """
+    Adds a mapped length and a right side position.
+    """
+
+    sam_df['RIGHT'] = [rightFinder(left, CIGAR) for left,CIGAR in zip(sam_df.POS, sam_df.CIGAR)]
+
+    sam_df['LENGTH'] = [lengthFinder(CIGAR) for CIGAR in sam_df.CIGAR]
+
+    return sam_df
