@@ -133,3 +133,8 @@ dmypy.json
 
 #Any kind of sam file
 *.sam*
+*.csv
+
+#HTML file
+*.html
+
