@@ -2,7 +2,7 @@ from tools import samReader, samExtender, filterProperMapped
 import pandas as pd
 
 def exportForRAnalysis(sam_file_locs, outFile):
-
+    # need to incorporate the ability to add metadata here
     out_df = None 
 
     for file in sam_file_locs:

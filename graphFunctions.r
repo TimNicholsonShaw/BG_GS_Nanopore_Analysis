@@ -1,4 +1,5 @@
 library(ggplot2)
+library(tidyverse)
 
 read_in_prepped_sam <- function(csv_file) {
     df <- read_csv(csv_file)
@@ -11,7 +12,7 @@ read_in_prepped_sam <- function(csv_file) {
 
 plot_lengths <- function(df, sample, xmin=0, xmax=1000) {
     df <- select(df, SAMPLE %in% samples, ATTRIBUTE=="LENGTH")
-    plt <- ggplot(df,aes(x=VALUE)) + 
+    plt <- ggplot(df,aes(x=VALUE, color=SAMPLE)) + 
                 geom_density()
         return(plt)
 }
@@ -19,7 +20,7 @@ plot_lengths <- function(df, sample, xmin=0, xmax=1000) {
 plot_right_location <- function(df, samples) {
     df <- select(df, SAMPLE %in% samples, ATTRIBUTE=="RIGHT")
 
-    plt <- ggplot(df, aes(x=VALUE)) +
+    plt <- ggplot(df, aes(x=VALUE, color=SAMPLE)) +
         geom_density()
 
     return (plt)
