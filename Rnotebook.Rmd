@@ -13,11 +13,105 @@ TLS137_df <- read_in_prepped_sam("TLS137_Rdf.csv")
 head(TLS137_df)
 TLS129_df <- read_in_prepped_sam("TLS129_Rdf.csv")
 head(TLS129_df)
-
 ```
 
+TLS129 barodes:
+1) siL +Stop
+2) siL NSD
+3) siL PTC
+4) siN4 +Stop
+5) siN4 NSD
+6) siN4 PTC
+7) siA1 +Stop
+8) siA1 NSD
+9) siA1 PTC
+10) siSki +Stop
+11) siSki NSD
+12) siSki PTC
 
 ```{r}
+# How do the different substrates compare in the control condition
+#Overall length of reads
+TLS129_df %>%
+  pivot_longer(cols=c("LENGTH")) %>%
+  filter(id %in% c("bar01", "bar02", "bar03")) %>%
+  ggplot(aes(x=value, color=substrate)) + geom_density() + xlim(0,800)
+#Does not appear to be a huge difference between NSD and Stopped. Unusual
+#PTC does not appear to have anything in the full length category
 
+#Right mapping location
+TLS129_df %>%
+  pivot_longer(cols=c("RIGHT")) %>%
+  filter(id %in% c("bar01", "bar02", "bar03")) %>%
+  ggplot(aes(x=value, color=substrate)) + geom_density() + xlim(700,2600)
+#Slightly less "full length" in the NSD, very little  in the PTC
+#Are my +stop substrate and the NSD substrate more alike than i believe?
+#Maybe I still get a lot of readthrough of that last stop codon because of the context?
+# Biorxiv paper just came out on this
+
+
+#How does A1 depletion affect the different substrates?
+TLS129_df %>%
+  pivot_longer(cols=c("LENGTH")) %>%
+  filter(condition %in% c("siLuc", "siA1")) %>%
+  ggplot(aes(x=value, color=condition)) + geom_density() + xlim(0,800) + facet_wrap(~substrate)
+
+TLS129_df %>%
+  pivot_longer(cols=c("RIGHT")) %>%
+  filter(condition %in% c("siLuc", "siA1")) %>%
+  ggplot(aes(x=value, color=condition)) + geom_density() + xlim(700,2600) + facet_wrap(~substrate)
+
+
+```
+```{r}
+
+
+TLS129_df %>%
+  pivot_longer(cols=c("RIGHT")) %>%
+  ggplot(aes(x=value, color=substrate)) + geom_density() + xlim(700,2600) + facet_wrap(~substrate + condition)
+```
+
+TLS137 barcodes:
+1) siL NSD Rep1 -PNK
+2) siA1 NSD Rep1 -PNK
+3) siL NSD Rep2 -PNK
+4) siA1 NSD Rep2 -PNK
+5) siL NSD Rep3 -PNK
+6) siA1 NSD Rep3 -PNK
+7) siL NSD Rep1 +PNK
+8) siA1 NSD Rep1 +PNK
+9) siL NSD Rep2 +PNK
+10) siA1 NSD Rep2 +PNK
+11) siL NSD Rep3 +PNK
+12) siA1 NSD Rep3 +PNK
+
+```{r}
+#TLS137 Analysis
+#How does PNK affect
+TLS137_df %>% 
+  pivot_longer(cols=c("LENGTH")) %>%
+  ggplot(aes(x=value, color=PNK)) + geom_density() + xlim(0,800) + facet_wrap(~replicate)
+
+TLS137_df %>% 
+  pivot_longer(cols=c("RIGHT")) %>%
+  ggplot(aes(x=value, color=PNK)) + geom_density() + xlim(700,2600) + facet_wrap(~replicate)
+#PNK slightly increases the proportion of full length in 2 out of 3 replicates. Still concerned about replicate 1. Replicate 1 went off protocol. Maybe best to drop.
+
+#How does A1 depletion affect in PNK+ samples
+TLS137_df %>% 
+  pivot_longer(cols=c("LENGTH")) %>%
+  filter(PNK=="+") %>%
+  ggplot(aes(x=value, color=condition)) + geom_density() + xlim(0,800) + facet_wrap(~replicate)
+
+TLS137_df %>% 
+  pivot_longer(cols=c("RIGHT")) %>%
+  filter(PNK=="+") %>%
+  ggplot(aes(x=value, color=condition)) + geom_density() + xlim(700,2600) + facet_wrap(~replicate)
+
+# A1 depletion increases things that map to a full length.
+# This is consistent with the idea that A1 KD is stabilizing things that have been cleaved in the polyA tail
+# We would predict that if we look at poly-adenylated species that map to the correct end, siA1 should have
+# longer polyA tails
+# I'm going to examine this with tailfindr
 ```
 
