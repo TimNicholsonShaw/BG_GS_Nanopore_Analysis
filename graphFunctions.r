@@ -1,5 +1,6 @@
 library(ggplot2)
 library(tidyverse)
+library(dplyr)
 
 read_in_prepped_sam <- function(csv_file) {
     df <- read_csv(csv_file)

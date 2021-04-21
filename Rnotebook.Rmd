@@ -115,3 +115,17 @@ TLS137_df %>%
 # I'm going to examine this with tailfindr
 ```
 
+```{r}
+library(tailfindr)
+df <- find_tails(fast5_dir = system.file('extdata', 'cdna', package = 'tailfindr'),
+                 save_dir = '~/Downloads',
+                 csv_filename = 'cdna_tails.csv',
+                 num_cores = 2,
+                 save_plots = TRUE,
+                 plotting_library = 'rbokeh')
+```
+```{r}
+source("run_tail_finder.r")
+tailfindr_test()
+```
+
