@@ -1,5 +1,5 @@
 library(tailfindr)
-
+args = commandArgs(trailingOnly = T)
 # error with setting up compute clusters
 # try running 
 # parallel:::setDefaultClusterOptions(setup_strategy = "sequential")
@@ -14,3 +14,13 @@ tailfindr_test <- function(){
                  num_cores = 4)
     return(df)
 }
+
+
+find_tails(fast5_dir = ars[1],
+            save_dir = './',
+            csv_filename = args[2],
+            num_cores = 4,
+            basecall_group = 'Basecall_1D_001',
+            dna_datatype = 'custom-cdna',
+            end_primer="ACTTGCCTGTCGCTCTATCTTCACACGACGCTCTTCCGA"
+            )
