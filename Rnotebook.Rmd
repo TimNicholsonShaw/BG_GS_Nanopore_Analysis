@@ -126,6 +126,11 @@ df <- find_tails(fast5_dir = system.file('extdata', 'cdna', package = 'tailfindr
 ```
 ```{r}
 source("run_tail_finder.r")
-tailfindr_test()
+parallel:::setDefaultClusterOptions(setup_strategy = "sequential")
+find_tails(fast5_dir = "~/Desktop/tailfindr_test/test_fast5/",
+            save_dir = '~/Desktop/tailfindr_test/',
+            csv_filename = "test.csv",
+            num_cores = 2,
+            basecall_group = 'Basecall_1D_001')
 ```
 
