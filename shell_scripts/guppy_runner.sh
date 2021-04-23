@@ -1,8 +1,8 @@
 #! /bin/csh
 #PBS -q hotel
 #PBS -N GUPPY
-#PBS -l nodes=1:ppn=8
-#PBS -l walltime=04:00:00
+#PBS -l nodes=1:ppn=16
+#PBS -l walltime=06:00:00
 #PBS -A jlykkeandersen
 #PBS -V
 #PBS -o guppy.o
@@ -15,7 +15,7 @@
 --recursive \
 --barcode_kits SQK-PBK004 \
 --fast5_out\
---cpu_threads_per_caller 2 \
+--cpu_threads_per_caller 4 \
 --num_callers 4 \
 --trim_strategy none
 
