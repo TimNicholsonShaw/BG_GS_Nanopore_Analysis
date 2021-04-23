@@ -15,6 +15,8 @@ tailfindr_test <- function(){
     return(df)
 }
 
+# Install R packages to local directory using the lib parameter in install.pacakges
+
 
 find_tails(fast5_dir = ars[1],
             save_dir = './',
@@ -22,5 +24,6 @@ find_tails(fast5_dir = ars[1],
             num_cores = 4,
             basecall_group = 'Basecall_1D_001',
             dna_datatype = 'custom-cdna',
+            front_primer="GACACAACTGTGTTCACTAGC",
             end_primer="ACTTGCCTGTCGCTCTATCTTCACACGACGCTCTTCCGA"
             )
