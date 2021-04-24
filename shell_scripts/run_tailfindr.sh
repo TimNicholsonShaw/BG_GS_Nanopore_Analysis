@@ -1,4 +1,4 @@
-#! /opt/bin/R
+#! /opt/R/bin/Rscript
 #PBS -q hotel
 #PBS -N TALEOFTWOTAILS
 #PBS -l nodes=1:ppn=1
