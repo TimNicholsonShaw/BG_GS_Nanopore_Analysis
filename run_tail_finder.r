@@ -27,7 +27,7 @@ tailfindr_test <- function(){
 # Use withr package to get with_libpaths() and specify the devtools library path
 
 find_tails(fast5_dir = args[1],
-                        save_dir = './',
-                        csv_filename = args[2],
+                        save_dir = args[2],
+                        csv_filename = "A_tails.csv",
                         num_cores = 12,
                         basecall_group = 'Basecall_1D_001')
