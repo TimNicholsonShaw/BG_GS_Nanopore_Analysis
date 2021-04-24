@@ -34,4 +34,4 @@ tailfindr_test <- function(){
        #                     end_primer="ACTTGCCTGTCGCTCTATCTTCACACGACGCTCTTCCGA"
         #                    )
          #   )
-print('woo')
+print('woo', args[1])
