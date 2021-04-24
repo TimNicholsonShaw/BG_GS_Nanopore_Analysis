@@ -1,6 +1,8 @@
-library(tailfindr, lib="~/R_libs/") #this will only work on tscc now
+.libPaths("~/R_libs/")#this will only work on tscc now
+library(tailfindr) 
 library(withr)
 args = commandArgs(trailingOnly = T)
+
 # error with setting up compute clusters
 # try running 
 # parallel:::setDefaultClusterOptions(setup_strategy = "sequential")
@@ -24,14 +26,8 @@ tailfindr_test <- function(){
 # Install R packages to local directory using the lib parameter in install.pacakges
 # Use withr package to get with_libpaths() and specify the devtools library path
 
-#with_libpaths("~/R_libs/", find_tails(fast5_dir = args[1],
- #                           save_dir = './',
-  #                          csv_filename = args[2],
-   #                         num_cores = 4,
-    #                        basecall_group = 'Basecall_1D_001',
-     #                       dna_datatype = 'custom-cdna',
-      #                      front_primer="TTTCTGTTGGTGCTGATATTGCGACACAACTGTGTTCACTAGC",
-       #                     end_primer="ACTTGCCTGTCGCTCTATCTTCACACGACGCTCTTCCGA"
-        #                    )
-         #   )
-print(paste('woo', args[1]))
+find_tails(fast5_dir = args[1],
+                        save_dir = './',
+                        csv_filename = args[2],
+                        num_cores = 10,
+                        basecall_group = 'Basecall_1D_001')
