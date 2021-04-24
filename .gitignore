@@ -138,3 +138,6 @@ dmypy.json
 #HTML file
 *.html
 
+#RFiles
+.RData
+

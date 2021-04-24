@@ -29,5 +29,5 @@ tailfindr_test <- function(){
 find_tails(fast5_dir = args[1],
                         save_dir = './',
                         csv_filename = args[2],
-                        num_cores = 10,
+                        num_cores = 12,
                         basecall_group = 'Basecall_1D_001')
