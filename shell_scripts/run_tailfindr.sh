@@ -8,4 +8,4 @@
 #PBS -o tailfindr.o
 #PBS -e tailfindr.e
 
-Rscript /home/t2shaw/BG_GS_Nanopore_Analysis/run_tail_finder.r
+Rscript /home/t2shaw/BG_GS_Nanopore_Analysis/run_tail_finder.r $IN
