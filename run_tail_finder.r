@@ -32,4 +32,5 @@ find_tails(fast5_dir = args[1],
                         num_cores = 15,
                         basecall_group = 'Basecall_1D_001')
 
+aksdlkn n lkdlkfjlke
 quit()
