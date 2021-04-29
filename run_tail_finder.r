@@ -31,3 +31,5 @@ find_tails(fast5_dir = args[1],
                         csv_filename = "A_tails.csv",
                         num_cores = 15,
                         basecall_group = 'Basecall_1D_001')
+
+quit()
