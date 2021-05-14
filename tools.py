@@ -127,3 +127,11 @@ def filterProperMapped(sam_df, properFivePrime=706, margin=10):
     properFiveMapped = ((sam_df.POS > properFivePrime - margin) & (sam_df.POS < properFivePrime + margin)) & is_mapped
 
     return sam_df[properFiveMapped]
+
+
+def filterSenseStrand(sam_df):
+    sam_df = isExtendedOrReturnsExtended(sam_df)
+    is_mapped = sam_df.FLAG.isin([0,16])
+    
+    return sam_df[is_mapped]
+
