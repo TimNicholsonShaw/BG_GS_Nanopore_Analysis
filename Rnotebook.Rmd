@@ -134,3 +134,28 @@ find_tails(fast5_dir = "~/Desktop/tailfindr_test/test_fast5/",
             basecall_group = 'Basecall_1D_001')
 ```
 
+Does it change anything if I only look at the sense strand? Because of how 
+nanopore can fall off
+```{r}
+source("graphFunctions.r")
+TLS137_both <- read_in_prepped_sam("~/Desktop/TLS137_NSDalns/01_bothstrands.csv")
+TLS137_sense <- read_in_prepped_sam("~/Desktop/TLS137_NSDalns/01_sensestrands.csv")
+
+
+TLS137_both$SAMPLE <- "Both_Strands"
+TLS137_sense$SAMPLE <- "Sense_Strand"
+
+TLS137_combo <- rbind(TLS137_both, TLS137_sense)
+
+ggplot(TLS137_combo, aes(x=RIGHT, color=SAMPLE)) + geom_density() + xlim(0,2500)
+
+```
+It appears that it does nothing.
+```{r}
+x <-"womp"
+y <-"derp"
+z <-"_"
+
+paste(x,z,y, sep="")
+```
+

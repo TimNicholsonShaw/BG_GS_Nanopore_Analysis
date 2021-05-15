@@ -28,6 +28,6 @@ tailfindr_test <- function(){
 
 find_tails(fast5_dir = args[1],
                         save_dir = args[2],
-                        csv_filename = paste(args[1], "_","A_tails.csv"),
+                        csv_filename = paste(args[1], "_","A_tails.csv", sep=""),
                         num_cores = 1,
                         basecall_group = 'Basecall_1D_001')
